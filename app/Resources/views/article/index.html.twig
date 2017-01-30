@@ -1,0 +1,54 @@
+{% extends "layouts/admin/main.html.twig" %}
+
+{% block title %}Articles{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Articles</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-index">
+                    Article List
+                    <a href="{{ path('article_new') }}" class="btn btn-info pull-right">Create</a>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Created At</th>
+                                    <th>Updated At</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for article in articles %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ article.name }}</td>
+                                        <td>{{ article.slug }}</td>
+                                        <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>{% if article.updatedAt %}{{ article.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>
+                                            <a href="{{ path('article_show', { 'id': article.id }) }}" class="btn btn-default">show</a>
+                                            <a href="{{ path('article_edit', { 'id': article.id }) }}" class="btn btn-success">edit</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
